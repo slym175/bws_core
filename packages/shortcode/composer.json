@@ -1,0 +1,23 @@
+{
+    "name": "bws/shortcode",
+    "description": "Bizfly Websolution shortcode manager package",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Bws\\Shortcode\\": "src"
+        }
+    },
+    "require": {
+        "laravel/framework": "^5.6|^6|^7|^8|^9"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bws\\Shortcode\\ShortcodeServiceProvider"
+            ],
+            "aliases": {
+                "Shortcode": "Bws\\Shortcode\\Facades\\Shortcode"
+            }
+        }
+    }
+}

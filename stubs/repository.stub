@@ -1,0 +1,11 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Bws\Core\Http\Repositories\EloquentRepository;
+use Modules\$MODULE$\Models\$MODEL_NAME$;
+
+class $CLASS$ extends EloquentRepository implements $CLASS$Interface
+{
+    protected $entity = $MODEL_NAME$::class;
+}

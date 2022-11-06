@@ -1,0 +1,30 @@
+@extends('core::master')
+
+@section('title', '$STUDLY_NAME$ list')
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/modules/$LOWER_NAME$/css/$LOWER_NAME$.css') }}">
+@endpush
+
+@section('pageActions')
+    <a href="{{ checkRoute('get_create_$LOWER_NAME$_page') }}" class="btn btn-primary btn-sm">
+        <i class="fas fa-ar"></i>
+        <span>Add new $LOWER_NAME$</span>
+    </a>
+@endsection
+
+@section('cardActions')
+    @if($dataTableFilter)
+        {!! $dataTableFilter !!}
+    @endif
+@endsection
+
+@section('content')
+    @if($dataTable)
+        {!! $dataTable !!}
+    @endif
+@endsection
+
+@push('js')
+    <script type="text/javascript" src="{{ asset('assets/modules/$LOWER_NAME$/js/$LOWER_NAME$.js') }}"></script>
+@endpush

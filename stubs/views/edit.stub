@@ -1,0 +1,23 @@
+@extends('core::master')
+
+@section('title', 'Update $LOWER_NAME$')
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/modules/$LOWER_NAME$/css/$LOWER_NAME$.css') }}">
+@endpush
+
+@section('pageActions')
+    <a href="{{ checkRoute('get_$LOWER_NAME$_list_page') }}" class="btn btn-link btn-sm">
+        <i class="fas fa-arrow-left-long"></i>
+        <span>Back to $LOWER_NAME$ list</span>
+    </a>
+@endsection
+
+@section('content')
+    <h1>Welcome, Update $STUDLY_NAME$ item</h1>
+    <p>This view is loaded from module: {!! config('$LOWER_NAME$.name') !!}</p>
+@endsection
+
+@push('js')
+    <script type="text/javascript" src="{{ asset('assets/modules/$LOWER_NAME$/js/$LOWER_NAME$.js') }}"></script>
+@endpush

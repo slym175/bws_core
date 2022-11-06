@@ -1,0 +1,118 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Modules\$STUDLY_NAME$\Repositories\$STUDLY_NAME$RepositoryInterface;
+use Bws\Core\Exceptions\CreateResourceException;
+use Bws\Core\Exceptions\UpdateResourceException;
+use Bws\Core\Exceptions\DeleteResourceException;
+use Bws\Core\Criteria\OrderBy;
+use Bws\Core\Criteria\SearchByField;
+use Bws\Core\Models\Datatable;
+use Bws\Core\Models\DatatableFilter;
+
+class $CLASS$ extends Controller
+{
+    protected $repository;
+
+    public function __construct($STUDLY_NAME$RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function index()
+    {
+        $perPage = (int)$request->input('perPage', config('app.per_page'));
+        $$LOWER_NAME$_list = $this->repository->withCriteria([
+            new SearchByField($request->search ?? []),
+            new OrderBy($request->column ?? 'id', $request->sortBy ?? 'asc')
+        ])->paginate($perPage);
+        return view('$LOWER_NAME$::index', [
+            'dataTable' => (new Datatable($$LOWER_NAME$_list, config('$LOWER_NAME$.crud.datatable'), config('$LOWER_NAME$.crud.datatable_actions'))),
+            'dataTableFilter' => (new DatatableFilter(config('$LOWER_NAME$.crud.datatable'))),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Renderable
+     */
+    public function create()
+    {
+        return view('$LOWER_NAME$::create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $$LOWER_NAME$ = $this->repository->findOrFail($request->all());
+        if(!$$LOWER_NAME$) throw new CreateResourceException();
+        return redirect()->back()->with('_success_noty', '$STUDLY_NAME$\'s created successfully!');
+    }
+
+    /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
+    public function show($id)
+    {
+        $real_id = $this->repository->getEntity()->decode($id);
+        $$LOWER_NAME$ = $this->repository->findOrFail($real_id);
+        return view('$LOWER_NAME$::show', [
+            '$LOWER_NAME$' => $$LOWER_NAME$
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
+    public function edit($id)
+    {
+        $real_id = $this->repository->getEntity()->decode($id);
+        $$LOWER_NAME$ = $this->repository->findOrFail($real_id);
+        return view('$LOWER_NAME$::edit', [
+            '$LOWER_NAME$' => $$LOWER_NAME$
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $real_id = $this->repository->getEntity()->decode($id);
+        $$LOWER_NAME$ = $this->repository->findAndUpdate($real_id, $request->all());
+        if(!$$LOWER_NAME$) throw new UpdateResourceException();
+        return redirect()->back()->with('_success_noty', '$STUDLY_NAME$\'s updated successfully!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        $real_id = $this->repository->getEntity()->decode($id);
+        $$LOWER_NAME$ = $this->repository->findAndDelete($real_id);
+        if(!$$LOWER_NAME$) throw new DeleteResourceException();
+        return redirect()->back()->with('_success_noty', '$STUDLY_NAME$\'s deleted successfully!');
+    }
+}

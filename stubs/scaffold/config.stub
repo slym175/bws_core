@@ -1,0 +1,83 @@
+<?php
+
+return [
+    'name' => '$STUDLY_NAME$',
+    'permissions' => [
+        [
+            'name' => 'get-all-$LOWER_NAME$',
+            'guard_name' => 'web',
+            'display_name' => 'Get/Show $LOWER_NAME$ list'
+        ],
+        [
+            'name' => 'get-$LOWER_NAME$-detail',
+            'guard_name' => 'web',
+            'display_name' => 'Get/Show $LOWER_NAME$ detail'
+        ],
+        [
+            'name' => 'create-new-$LOWER_NAME$',
+            'guard_name' => 'web',
+            'display_name' => 'Create new $LOWER_NAME$'
+        ],
+        [
+            'name' => 'update-$LOWER_NAME$',
+            'guard_name' => 'web',
+            'display_name' => 'Update $LOWER_NAME$'
+        ],
+        [
+            'name' => 'delete-$LOWER_NAME$',
+            'guard_name' => 'web',
+            'display_name' => 'Delete $LOWER_NAME$'
+        ]
+    ],
+    'menu' => [
+        [
+            'section_order' => 1,
+            'section' => 'General',
+            'name' => '$STUDLY_NAME$',
+            'icon' => 'fas fa-home-lg',
+            'permission' => '',
+            'url' => '',
+            'items' => [
+                [
+                    'section_order' => 1,
+                    'section' => 'General',
+                    'name' => '$STUDLY_NAME$ list',
+                    'icon' => '',
+                    'permission' => '',
+                    'url' => 'get_$LOWER_NAME$_list_page',
+                    'items' => []
+                ],
+                [
+                    'section_order' => 1,
+                    'section' => 'General',
+                    'name' => 'Create new $LOWER_NAME$',
+                    'icon' => '',
+                    'permission' => '',
+                    'url' => 'get_create_$LOWER_NAME$_page',
+                    'items' => []
+                ]
+            ]
+        ]
+    ],
+    'crud' => [
+        'datatable' => [],
+        'datatable_actions' => [
+            [
+                'name' => 'Update',
+                'route' => 'get_show_$LOWER_NAME$_page',
+                'params' => 'id=id',
+                'icon' => 'fas fa-pen',
+                'confirmed' => false
+            ],
+            [
+                'name' => 'Delete',
+                'route' => 'post_destroy_$LOWER_NAME$',
+                'params' => 'id=id',
+                'icon' => 'fas fa-trash',
+                'confirmed' => true
+            ]
+        ],
+        'create_form' => [],
+        'update_form' => [],
+    ]
+];

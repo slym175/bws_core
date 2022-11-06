@@ -1,0 +1,9 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Bws\Core\Controllers\CoreController as Controller;
+
+class $CLASS$ extends Controller
+{
+}

@@ -1,0 +1,27 @@
+.image-box {
+    display: inline-block;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    position: relative;
+
+    .btn_remove_image {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid #dddddd;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    .image-box-actions {
+        text-align: center;
+        padding: 3px;
+        border-top: 1px solid #dddddd;
+    }
+}

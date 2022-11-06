@@ -1,0 +1,74 @@
+{
+    "name": "bws/core",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Slym175",
+            "email": "thuyhu9876@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1",
+        "ext-gd": "*",
+        "ext-zip": "*",
+        "spatie/laravel-package-tools": "^1.13.6",
+        "opis/closure": "^3.6.3",
+        "vinkla/hashids": "^10.0.1",
+        "nwidart/laravel-modules": "^9.0.6",
+        "spatie/laravel-permission": "^5.5.16",
+        "wikimedia/composer-merge-plugin": "^2.0.1",
+        "mrclay/minify": "^3.0.13",
+        "tedivm/jshrink": "^1.4.0",
+        "laravel/framework": "^8|^9",
+        "intervention/image": "^2.7.2",
+        "xantios/mimey": "^2.2.0",
+        "league/flysystem-aws-s3-v3": "^3.5.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bws\\Core\\": "src",
+            "Bws\\Shortcode\\": "packages/shortcode/src",
+            "Bws\\Assets\\": "packages/assets/src",
+            "Bws\\Media\\": "packages/media/src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bws\\Core\\CoreServiceProvider"
+            ],
+            "aliases": {
+                "Core": "Bws\\Core\\Facades\\Core",
+                "Hook": "Bws\\Core\\Facades\\Hook",
+                "ModelType": "Bws\\Core\\Facades\\ModelType",
+                "AdminMenu": "Bws\\Core\\Facades\\AdminMenu",
+                "Form": "Bws\\Core\\Facades\\Form",
+                "Datatable": "Bws\\Core\\Facades\\Datatables\\Datatable",
+                "Column": "Bws\\Core\\Facades\\Datatables\\Column",
+                "Assets": "Bws\\Assets\\Facades\\Assets",
+                "Shortcode": "Bws\\Shortcode\\Facades\\Shortcode",
+                "Media": "Bws\\Media\\Facades\\MediaFacade",
+                "MediaHelper": "Bws\\Media\\Facades\\MediaHelperFacade"
+            }
+        },
+        "merge-plugin": {
+            "include": [
+                "packages/*/composer.json"
+            ],
+            "require": [],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false,
+            "merge-replace": true,
+            "merge-scripts": false
+        }
+    }
+}

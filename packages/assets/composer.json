@@ -1,0 +1,56 @@
+{
+	"name": "bws/assets",
+	"description": "Asset management for Laravel",
+	"keywords": [
+		"laravel",
+		"asset",
+		"assets",
+		"css",
+		"js",
+		"minify",
+		"pipeline"
+	],
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Greg Roach",
+			"email": "fisharebest@gmail.com"
+		}
+	],
+	"require": {
+		"league/flysystem": "^3.10.2",
+		"mrclay/minify": "^3.0.13",
+		"tedivm/jshrink": "^1.4.0",
+		"illuminate/support": "^9.0",
+		"illuminate/contracts": "^9.0",
+		"illuminate/console": "^9.0"
+	},
+	"require-dev": {
+		"league/flysystem-memory": "^3.3.0",
+		"phpunit/phpunit": "5.7.27 | 6.5.14 | 7.5.20 | ~8.5 | ~9.5",
+		"php-coveralls/php-coveralls": "^2.5.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Bws\\Assets\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Bws\\Assets\\Tests\\": "tests/"
+		},
+		"files": [
+			"tests/shims.php"
+		]
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Bws\\Assets\\AssetsServiceProvider"
+			],
+			"aliases": {
+				"Assets": "Bws\\Assets\\Facades\\Assets"
+			}
+		}
+	}
+}

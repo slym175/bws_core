@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\$STUDLY_NAME$\Http\Controllers\$STUDLY_NAME$Controller;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::group(['prefix' => get_dashboard_prefix(), 'middleware' => ['auth', 'verified', 'can.access.dashboard'], 'as' => 'admin.'], function() {
+    Route::group(['prefix' => '$LOWER_NAME$'], function() {
+        Route::get('/', [$STUDLY_NAME$Controller::class, 'index'])->name('get_$LOWER_NAME$_list_page');
+        Route::get('/create', [$STUDLY_NAME$Controller::class, 'create'])->name('get_create_$LOWER_NAME$_page');
+        Route::post('/create', [$STUDLY_NAME$Controller::class, 'store'])->name('post_store_$LOWER_NAME$');
+        Route::get('/detail/{id}', [$STUDLY_NAME$Controller::class, 'show'])->name('get_show_$LOWER_NAME$_page');
+        Route::get('/update/{id}', [$STUDLY_NAME$Controller::class, 'edit'])->name('get_edit_$LOWER_NAME$_page');
+        Route::put('/update/{id}', [$STUDLY_NAME$Controller::class, 'update'])->name('post_update_$LOWER_NAME$');
+        Route::delete('/delete/{id}', [$STUDLY_NAME$Controller::class, 'destroy'])->name('post_destroy_$LOWER_NAME$');
+    });
+});
