@@ -4,8 +4,6 @@ namespace Bws\Core\Traits;
 
 use Bws\Core\Classes\AdminPage;
 use Bws\Core\Classes\DashboardMenu;
-use Bws\Core\Classes\Datatable\Column;
-use Bws\Core\Classes\Datatable\Datatable;
 use Bws\Core\Classes\Form\Form;
 use Bws\Core\Classes\Hook;
 use Bws\Core\Classes\ModelType;
@@ -24,13 +22,7 @@ trait LoadCoreSingleton
         $this->app->singleton('dashboard_menu', function () {
             return new DashboardMenu();
         });
-        $this->app->singleton('Datatable', function () {
-            return new Datatable();
-        });
-        $this->app->singleton('Datatable_Column', function () {
-            return new Column();
-        });
-        $this->app->singleton('form', function () {
+                $this->app->singleton('form', function () {
             return new Form();
         });
         $this->app->singleton('admin_page', function () {

@@ -37,6 +37,7 @@ class CreateAdminUserCommand extends Command
             ['name' => 'access-dashboard'],
             [
                 'name' => 'access-dashboard',
+                'module' => 'core',
                 'display_name' => 'Access dashboard',
                 'description' => 'Can access dashboard',
             ]

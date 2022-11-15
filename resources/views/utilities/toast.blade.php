@@ -1,22 +1,4 @@
-@once
-<style>
-    .toast-header.success {
-        color: var(--kt-primary);
-    }
-
-    .toast-header.error {
-        color: var(--kt-danger);
-    }
-
-    .toast-header.success .fa-warning {
-        display: none;
-    }
-
-    .toast-header.error .fa-check {
-        display: none;
-    }
-</style>
-@endonce
+@push('js')
 @if (session()->has('_success_msg')
     || session()->has('_error_msg')
     || (isset($errors) && $errors->count() > 0)
@@ -38,54 +20,58 @@
         </div>
     </div>
 @endif
+@endpush
 @once
 <script type="text/javascript">
-    function _showToast(messageType, message, messageHeader = '') {
-        const container = $('#kt_docs_toast_stack_container');
-        const targetElement = $('[data-kt-docs-toast="stack"]');
-        targetElement.parent('#kt_docs_toast_stack_container').empty();
-        const newToast = targetElement.clone();
-
-        const _toast_header = newToast.find('.toast-header');
-        const _toast_body = newToast.find('.toast-body');
-        _toast_header.addClass(messageType);
-        _toast_header.addClass(messageType === 'success' ? 'bg-success text-white' : 'bg-danger text-white');
-        _toast_header.find('.me-auto').empty().html(messageHeader);
-        _toast_body.empty().html(message);
-
-        container.append(newToast);
-
-        const toast = bootstrap.Toast.getOrCreateInstance(newToast);
-        toast.show();
+    function _toastrOptions() {
+        return {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toastr-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
     }
 
-    function showSuccess($message, messageHeader = '') {
-        _showToast('success', $message, messageHeader)
+    function showSuccess($message) {
+        toastr.options = _toastrOptions();
+        toastr.success($message);
     }
 
-    function showError($message, messageHeader = '') {
-        _showToast('error', $message, messageHeader)
+    function showError($message) {
+        toastr.options = _toastrOptions();
+        toastr.error($message);
     }
 
     $(document).ready(function () {
         @if (session()->has('_success_msg'))
-        showSuccess('{{ session('_success_msg') }}', 'Success!');
+            showSuccess('{{ session('_success_msg') }}');
         @endif
         @if (session()->has('status'))
-        showSuccess('{{ session('status') }}', 'Success!');
+            showSuccess('{{ session('status') }}');
         @endif
         @if (session()->has('resent'))
-        showSuccess('{{ trans('bws/core::core.auth.resent_verify_email') }}', 'Success!');
+            showSuccess('{{ trans('bws/core::core.auth.resent_verify_email') }}');
         @endif
         @if (session()->has('_error_msg'))
-        showError('{{ session('_error_msg') }}', 'Error!');
+            showError('{{ session('_error_msg') }}');
         @endif
         @if (isset($error_msg))
-        showError('{{ $error_msg }}', 'Error!');
+            showError('{{ $error_msg }}');
         @endif
         @if (isset($errors))
         @foreach ($errors->all() as $error)
-        showError('{{ $error }}', 'Validate error!');
+            showError('{{ $error }}');
         @endforeach
         @endif
     });

@@ -3,6 +3,8 @@
 @section('title', 'Permission list')
 
 @push('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bws/core/plugins/custom/datatables/datatables.bundle.css') }}">
+    <script type="text/javascript" src="{{ asset('vendor/bws/core/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
 
 @section('page_action')
@@ -13,18 +15,11 @@
 @endsection
 
 @section('content')
-    {{
-        \Bws\Core\Facades\Datatables\Datatable::make($data)
-            ->addColumn(
-                \Bws\Core\Facades\Datatables\Column::make('name', 'Name', function ($item) {
-                    return $item->name;
-                })
-            )->addColumn(
-                \Bws\Core\Facades\Datatables\Column::make('display_name', 'Display name', function ($item) {
-                    return $item->display_name;
-                })
-            )->render()
-    }}
+    <div class="card">
+        <div class="card-body">
+            Load permissions
+        </div>
+    </div>
 @endsection
 
 @push('js')
